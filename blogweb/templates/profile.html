@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<a href='/'>Back to Homepage</a>
+{% endblock %}
+
+{% block body %}
+<div>
+    <div class='media'>
+        <img class='rounded-circle account-img' src='{{ image }}'>
+        <div class='media-body'>
+            <h2 class='account-heading'>{{ user.username }}</h2>
+            <p class='text-secondary'>{{ user.email }}</p>
+        </div>     
+    </div>
+    
+</div>
+<br>
+<div>
+    <h3>About Me</h3>
+        {% if current_user.is_authenticated %}
+            {% if current_user == user %}
+                {% if user.about != '' %}
+                    <div>
+                        {{ user.about }}
+                    </div>
+                    <br>
+                    <a href="/profile/update">Edit About Me</a>
+                {% else %}
+                    You have nothing written about you. Let us know about yourself!
+                    <br>
+                    <a href="/profile/update">Edit About Me</a>
+                {% endif %} 
+            {% else %}
+                {% if user.about != '' %}
+                    <div>
+                        {{ user.about }}
+                    </div>
+                {% else %}
+                    There is currently nothing on {{ user.username }}
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

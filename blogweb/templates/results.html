@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div>
+    {% for post in posts %}
+        <br>
+        <a href='/post/{{post.id}}'>{{ post.title }}</a>
+        <h4>Date Published: {{ post.date_published }}</h4>
+        <h3>By: {{ post.author.username }}</h3>
+        {% if current_user.username == post.author.username %}
+            <a href='/post/{{post.id}}/delete'>Delete</a>
+            <a href='/post/{{post.id}}/edit'>Edit Post</a>
+        {% else %}
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}
